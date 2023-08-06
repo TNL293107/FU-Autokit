@@ -1,0 +1,13 @@
+{
+	"manifest_version": 3,
+	"name": "FU Autokit",
+	"author": "Chillin Studio",
+	"version": "0.1",
+	"description": "FU Autokit helps FPT University students automate common web interactions.",
+	"action": {
+		"default_popup": "./popup/popup.html"
+	},
+	"permissions": [
+		"storage"
+	]
+}
