@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+	<title>FPTU Autokit</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap -->
+	<link href="../utils/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Embed css link here-->
+	<link rel="stylesheet" href="../utils/css/stylemenu.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="../utils/bootstrap.bundle.min.js"></script>
+</head>
+
+<body id="body">
+	<div class="title">
+		<div class="name prevent-select">FPTU Autokit</div>
+		<div class="settingBtn">
+			<button class="btn btn-secondary btn-sm theme" type="button" id="dropdownMenuButton"
+				data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<img src="/assets/gear.svg" alt="setting" id="setting">
+			</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				<li>
+					<h6 class="dropdown-item-text prevent-select" id="theme"></h6>
+				</li>
+				<option class="dropdown-item bg prevent-select" id="light" value="light"></option>
+				<option class="dropdown-item bg prevent-select" id="dark" value="dark"></option>
+				<option class="dropdown-item bg prevent-select" id="sys" value="sys"></option>
+				<li>
+					<h6 class="dropdown-item-text prevent-select" id="language"></h6>
+				</li>
+				<option class="dropdown-item lang prevent-select" value="vi" id="vi"></option>
+				<option class="dropdown-item lang prevent-select" value="en" id="en"></option>
+			</div>
+		</div>
+	</div>
+
+	<div class="nav justify-content-center">
+		<div class="btn-group FAP col-xs-2">
+			<button type="button" class="btn btn-sm travelBtn" id="FAP"></button>
+			<button type="button" class="btn dropdown-toggle dropdown-toggle-split d-inline-block"
+				data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+				<span class="visually-hidden">Toggle Dropdown</span>
+			</button>
+			<ul class="dropdown-menu w-200">
+				<li>
+					<h6 class="dropdown-item-text onoff"></h6>
+				</li>
+				<li>
+					<div class="form-check form-switch settingSwitch">
+						<input class="form-check-input" type="checkbox" role="switch" id="fapLogin" checked>
+						<label class="form-check-label autologin" for="flexSwitchCheckChecked"></label>
+					</div>
+				</li>
+				<li>
+					<div class="form-check form-switch settingSwitch">
+						<input class="form-check-input" type="checkbox" role="switch" id="fapFeedback" checked>
+						<label class="form-check-label" for="flexSwitchCheckChecked" id="feedback"></label>
+					</div>
+				</li>
+				<li>
+					<div class="form-check form-switch settingSwitch">
+						<input class="form-check-input" type="checkbox" role="switch" id="fapGPA" checked>
+						<label class="form-check-label" for="flexSwitchCheckChecked" id="GPA"></label>
+					</div>
+				</li>
+				<li>
+					<div class="form-check form-switch settingSwitch">
+						<input class="form-check-input" type="checkbox" role="switch" id="fapFE" checked>
+						<label class="form-check-label" for="flexSwitchCheckChecked" id="FE"></label>
+					</div>
+				</li>
+				<li>
+					<div class="form-check form-switch settingSwitch">
+						<input class="form-check-input" type="checkbox" role="switch" id="fapNoti" checked>
+						<label class="form-check-label" for="flexSwitchCheckChecked" id="NOTI"></label>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="btn-group Edu col-xs-2">
+			<button type="button" class="btn btn-sm travelBtn" id="EDN"></button>
+			<button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+				aria-expanded="false" data-bs-auto-close="outside">
+				<span class="visually-hidden">Toggle Dropdown</span>
+			</button>
+			<ul class="dropdown-menu">
+				<li>
+					<h6 class="dropdown-item-text onoff"></h6>
+				</li>
+				<li>
+					<div class="form-check form-switch settingSwitch">
+						<input class="form-check-input" type="checkbox" role="switch" id="ednLogin" checked>
+						<label class="form-check-label autologin" for="flexSwitchCheckChecked"></label>
+					</div>
+				</li>
+				<li>
+					<div class="form-check form-switch settingSwitch">
+						<input class="form-check-input" type="checkbox" role="switch" id="ednGrade" checked>
+						<label class="form-check-label" for="flexSwitchCheckChecked" id="gradeongroupmates"></label>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="btn-group Coursera col-xs-2">
+			<button type="button" class="btn btn-sm travelBtn" id="CRS"></button>
+			<button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+				aria-expanded="false" data-bs-auto-close="outside">
+				<span class="visually-hidden">Toggle Dropdown</span>
+			</button>
+			<ul class="dropdown-menu">
+				<li>
+					<h6 class="dropdown-item-text onoff"></h6>
+				</li>
+				<li>
+					<div class="form-check form-switch settingSwitch">
+						<input class="form-check-input" type="checkbox" role="switch" id="crsLogin" checked>
+						<label class="form-check-label autologin" for="flexSwitchCheckChecked"></label>
+					</div>
+				</li>
+				<li>
+					<div class="form-check form-switch settingSwitch">
+						<input class="form-check-input" type="checkbox" role="switch" id="crsGetLink" checked>
+						<label class="form-check-label" for="flexSwitchCheckChecked" id="getshareablelink"></label>
+					</div>
+				</li>
+				<li>
+					<div class="form-check form-switch settingSwitch">
+						<input class="form-check-input" type="checkbox" role="switch" id="crsGrade" checked>
+						<label class="form-check-label" for="flexSwitchCheckChecked" id="autoreview"></label>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="btn-group LBR col-xs-2">
+			<button type="button" class="btn btn-sm travelBtn" id="LBR"></button>
+			<button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+				aria-expanded="false" data-bs-auto-close="outside">
+				<span class="visually-hidden">Toggle Dropdown</span>
+			</button>
+			<ul class="dropdown-menu">
+				<li>
+					<h6 class="dropdown-item-text onoff"></h6>
+				</li>
+				<li>
+					<div class="form-check form-switch settingSwitch">
+						<input class="form-check-input" type="checkbox" role="switch" id="lbrFill" checked>
+						<label class="form-check-label" for="flexSwitchCheckChecked" id="autofillall"></label>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="btn-group CMS col-xs-2">
+			<button type="button" class="btn btn-sm travelBtn" id="CMS"></button>
+			<button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+				aria-expanded="false" data-bs-auto-close="outside">
+				<span class="visually-hidden">Toggle Dropdown</span>
+			</button>
+			<ul class="dropdown-menu">
+				<li>
+					<h6 class="dropdown-item-text onoff"></h6>
+				</li>
+				<li>
+					<div class="form-check form-switch settingSwitch">
+						<input class="form-check-input" type="checkbox" role="switch" id="cmsLogin" checked>
+						<label class="form-check-label autologin" for="flexSwitchCheckChecked"></label>
+					</div>
+				</li>
+				<!-- <li>
+					<div class="form-check form-switch settingSwitch">
+						<input class="form-check-input" type="checkbox" role="switch" id="cmsTool" checked>
+						<label class="form-check-label" for="flexSwitchCheckChecked">Tool CMS</label>
+					</div>
+				</li> -->
+			</ul>
+		</div>
+
+		<div class="btn-group FLM col-xs-2">
+			<button type="button" class="btn btn-sm travelBtn" id="FLM"></button>
+			<button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+				aria-expanded="false" data-bs-auto-close="outside">
+				<span class="visually-hidden">Toggle Dropdown</span>
+			</button>
+			<ul class="dropdown-menu">
+				<li>
+					<h6 class="dropdown-item-text onoff"></h6>
+				</li>
+				<li>
+					<div class="form-check form-switch settingSwitch">
+						<input class="form-check-input" type="checkbox" role="switch" id="flmLogin" checked>
+						<label class="form-check-label autologin" for="flexSwitchCheckChecked"></label>
+					</div>
+				</li>
+
+				<li>
+					<div class="form-check form-switch settingSwitch">
+						<input class="form-check-input" type="checkbox" role="switch" id="flmViet" checked>
+						<label class="form-check-label" for="flexSwitchCheckChecked" id="autochangelang"></label>
+					</div>
+				</li>
+				<li>
+					<div class="form-check form-switch settingSwitch">
+						<input class="form-check-input" type="checkbox" role="switch" id="flmFill" checked>
+						<label class="form-check-label" for="flexSwitchCheckChecked" id="suggestion"></label>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="btn-group DNG col-xs-2">
+			<button type="button" class="btn btn-sm travelBtn" id="DNG"></button>
+			<button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+				aria-expanded="false" data-bs-auto-close="outside">
+				<span class="visually-hidden">Toggle Dropdown</span>
+			</button>
+			<ul class="dropdown-menu">
+				<li>
+					<h6 class="dropdown-item-text onoff"></h6>
+				</li>
+				<li>
+					<div class="form-check form-switch settingSwitch">
+						<input class="form-check-input" type="checkbox" role="switch" id="dngFill" checked>
+						<label class="form-check-label" for="flexSwitchCheckChecked" id="autofillroll"></label>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="btn-group OCD col-xs-2">
+			<button type="button" class="btn btn-sm travelBtn" id="OCD"></button>
+			<button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+				aria-expanded="false" data-bs-auto-close="outside">
+				<span class="visually-hidden">Toggle Dropdown</span>
+			</button>
+			<ul class="dropdown-menu">
+				<li>
+					<h6 class="dropdown-item-text onoff"></h6>
+				</li>
+				<li>
+					<div class="form-check form-switch settingSwitch">
+						<input class="form-check-input" type="checkbox" role="switch" id="ocdLogin" checked>
+						<label class="form-check-label autologin" for="flexSwitchCheckChecked"></label>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="btn-group OJT col-xs-2">
+			<button type="button" class="btn btn-sm travelBtn" id="OJT"></button>
+			<button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+				aria-expanded="false" data-bs-auto-close="outside">
+				<span class="visually-hidden">Toggle Dropdown</span>
+			</button>
+			<ul class="dropdown-menu">
+				<li>
+					<h6 class="dropdown-item-text onoff"></h6>
+				</li>
+				<li>
+					<div class="form-check form-switch settingSwitch">
+						<input class="form-check-input" type="checkbox" role="switch" id="ojtLogin" checked>
+						<label class="form-check-label autologin" for="flexSwitchCheckChecked"></label>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="navbar navbar-expand-lg bg-body-tertiary container" id="gen">
+
+		<div class="col-md-4 gen" id="K18"></div>
+		<div class="form-check form-switch col-xs-4 genSwitch">
+			<input class="form-check-input" type="checkbox" role="switch" id="KKK">
+		</div>
+		<div class="col-md-4 gen" id="K19"></div>
+	</div>
+
+	<form class="myDiv" id="check">
+
+		<div class="form-group">
+			<label for="Campus" id="select"></label>
+			<select name="campus" id="campus" class="form-control form-control-sm">
+				<option value="0" selected="selected"></option>
+				<option value="3"></option>
+				<option value="4"></option>
+				<option value="5"></option>
+				<option value="6"></option>
+				<option value="7"></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="rollnum"></label>
+			<input type="text" name="rollnum" class="form-control" id="rollnum">
+		</div>
+		<div class="form-group">
+			<label for="email"></label>
+			<input type="email" class="form-control" name="email" id="email">
+		</div>
+		<div class="form-group" id="lbr">
+			<label for="password"></label>
+			<input type="password" class="form-control" name="password" id="password">
+			<input type="checkbox" id="show">
+			<label class="prevent-select" for="show"></label>
+		</div>
+		<button type="submit" class="btn btn-primary saveBtn"></button>
+	</form>
+
+	<br />
+
+	<div class="row">
+		<!--content footer-->
+		<div class="footer">
+			<p id="madeby"></p>
+			<p id="version"></p>
+		</div>
+	</div>
+
+	<script src="../utils/storage.js"></script>
+	<script src="./popup.js"></script>
+	<script src="./funcmanage.js"></script>
+</body>
+
+</html>
