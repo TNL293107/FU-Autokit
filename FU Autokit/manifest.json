@@ -1,0 +1,405 @@
+{
+	"manifest_version": 3,
+	"name": "FU Autokit",
+	"author": "Chillin Studio",
+	"version": "3.4",
+	"description": "FU Autokit is a Chrome extension that help FPT University students by automating various user’s interactions.",
+	"action": {
+		"default_popup": "./popup/popup.html"
+	},
+	"default_locale": "vi",
+	"options_page": "./popup/popup.html",
+	"homepage_url": "https://github.com/makecolour/FU-Autokit",
+	"permissions": [
+		"storage",
+		"contextMenus",
+		"declarativeContent",
+		"activeTab",
+		"tabs"
+	],
+	"web_accessible_resources": [
+		{
+			"resources": [
+				"/windows/index.html",
+				"/windows/index.js",
+				"/windows/indexcss.css"
+			],
+			"matches": [
+				"*://www.coursera.org/*"
+			]
+		},
+		{
+			"resources": [
+				"/_locales/vi/messages.json",
+				"/_locales/en/messages.json"
+			],
+			"matches": [
+				"<all_urls>"
+			]
+		},
+		{
+			"resources": [
+				"./service/shub_inject_script.js"
+			],
+			"matches": [
+				"*://shub.edu.vn/*"
+			]
+		}
+	],
+	"background": {
+		"service_worker": "./service/service-worker.js"
+	},
+	"content_scripts": [
+		{
+			"matches": [
+				"*://shub.edu.vn/*"
+			],
+			"run_at": "document_start",
+			"js": [
+				"./content/shub_inject.js"
+			]
+		},
+		{
+			"matches": [
+				"*://fap.fpt.edu.vn/Default.aspx/*",
+				"*://fap.fpt.edu.vn/*"
+			],
+			"js": [
+				"./content/fap_login.js"
+			]
+		},
+		{
+			"matches": [
+				"*://cmshn.fpt.edu.vn/*",
+				"*://cmshn.fpt.edu.vn/login/index.php"
+			],
+			"js": [
+				"./utils/storage.js",
+				"./content/cms_login.js"
+			]
+		},
+		{
+			"matches": [
+				"*://dng.fpt.edu.vn/*"
+			],
+			"js": [
+				"./utils/storage.js",
+				"./content/dng_login.js"
+			]
+		},
+		{
+			"matches": [
+				"*://accounts.google.com/v3/signin/identifier?*fap.fpt.edu.vn*",
+				"*://accounts.google.com/v3/signin/identifier?*cmshn.fpt.edu.vn*",
+				"*://accounts.google.com/v3/signin/identifier?*fu-edunext.fpt.edu.vn*",
+				"*://accounts.google.com/v3/signin/identifier?*flm.fpt.edu.vn*",
+				"*://accounts.google.com/v3/signin/identifier?*www.coursera.org*",
+				"*://accounts.google.com/v3/signin/identifier?*feid.fpt.edu.vn*",
+				"*://accounts.google.com/v3/signin/identifier?*ocd.fpt.edu.vn*",
+				"*://accounts.google.com/v3/signin/identifier?*googleauthensite01.fpt.edu.vn*",
+				"*://accounts.google.com/v3/signin/identifier?*ojt.fpt.edu.vn*"
+				
+			],
+			"js": [
+				"./utils/storage.js",
+				"./content/auto_login.js"
+			]
+		},
+		{
+			"matches": [
+				"*://flm.fpt.edu.vn/",
+				"*://flm.fpt.edu.vn/DefaultSignin"
+			],
+			"js": [
+				"./utils/storage.js",
+				"./content/flm_login.js"
+			]
+		},
+		{
+			"matches": [
+				"*://flm.fpt.edu.vn/*"
+			],
+			"js": [
+				"./utils/storage.js",
+				"./utils/jquery.js",
+				"./content/flm_setlang.js"
+			]
+		},
+		{
+			"matches": [
+				"*://flm.fpt.edu.vn/gui/role/student/ListCurriculum",
+				"*://flm.fpt.edu.vn/gui/role/student/SyllabusManagement",
+				"*://flm.fpt.edu.vn/gui/tool/AllPrequisiteSubject",
+				"*://flm.fpt.edu.vn/gui/tool/AllCorollarySubject"
+			],
+			"js": [
+				"./content/flm_autocomplete.js"
+			],
+			"css": [
+				"./utils/css/autocomplete.css"
+			]
+		},
+		{
+			"matches": [
+				"*://library.fpt.edu.vn/"
+			],
+			"js": [
+				"./utils/storage.js",
+				"./content/library_login.js"
+			]
+		},
+		{
+			"matches": [
+				"*://feid.fpt.edu.vn/Account/Login*fu-edunext.fpt.edu.vn*",
+				"*://feid.fpt.edu.vn/Account/Login*flm.fpt.edu.vn*",
+				"*://feid.fpt.edu.vn/Account/Login*fap.fpt.edu.vn*",
+				"*://feid.fpt.edu.vn/Account/Login*ocd.fpt.edu.vn*",
+				"*://feid.fpt.edu.vn/Account/Login*cmshn.fpt.edu.vn*"
+			],
+			"js": [
+				"./utils/storage.js",
+				"./content/feid_login.js"
+			]
+		},
+		{
+			"matches": [
+				"*://library.fpt.edu.vn/Auth/Login"
+			],
+			"js": [
+				"./utils/storage.js",
+				"./content/process_library.js"
+			]
+		},
+		{
+			"matches": [
+				"*://accounts.google.com/o/oauth2/auth*fap.fpt.edu.vn*",
+				"*://accounts.google.com/o/oauth2/v2/auth*cmshn.fpt.edu.vn*",
+				"*://accounts.google.com/o/oauth2/v2/auth*www.coursera.org*",
+				"*://accounts.google.com/o/oauth2/v2/auth*ocd.fpt.edu.vn*",
+				"*://accounts.google.com/o/oauth2/v2/auth/*feid.fpt.edu.vn*",
+				"*://accounts.google.com/o/oauth2/v2/auth*ojt.fpt.edu.vn*"
+			],
+			"js": [
+				"./utils/storage.js",
+				"./content/google.js"
+			]
+		},
+		{
+			"matches": [
+				"*://accounts.google.com/gsi/select?*fu-edunext.fpt.edu.vn*",
+				"*://accounts.google.com/gsi/select?*flm.fpt.edu.vn*",
+				"*://accounts.google.com/gsi/select?*googleauthensite01.fpt.edu.vn*"
+			],
+			"js": [
+				"./utils/storage.js",
+				"./content/gsi.js"
+			]
+		},
+		{
+			"matches": [
+				"*://fap.fpt.edu.vn/Feedback/*"
+			],
+			"js": [
+				"./utils/storage.js",
+				"./content/fap_feedback.js"
+			]
+		},
+		{
+			"matches": [
+				"*://fu-edunext.fpt.edu.vn/"
+			],
+			"js": [
+				"./utils/storage.js",
+				"./content/edunext_redirect.js"
+			]
+		},
+		{
+			"matches": [
+				"*://fu-edunext.fpt.edu.vn/course/activity/*"
+			],
+			"js": [
+				"./utils/storage.js",
+				"/content/edunext_grading.js"
+			]
+		},
+		{
+			"matches": [
+				"*://cmshn.fpt.edu.vn/mod/quiz/*",
+				"*://cmshn.fpt.edu.vn/course/view.php?*"
+			],
+			"js": [
+				"./utils/jquery.js",
+				"./content/cms_tool.js"
+			],
+			"world": "MAIN"
+		},
+		{
+			"matches": [
+				"*://tinder.com/*"
+			],
+			"js": [
+				"./content/web_t.js"
+			],
+			"world": "MAIN"
+		},
+		{
+			"matches": [
+				"*://fu-edunext.fpt.edu.vn/login"
+			],
+			"js": [
+				"./utils/storage.js",
+				"./content/edunext_process.js"
+			]
+		},
+		{
+			"matches": [
+				"*://fap.fpt.edu.vn/Grade/StudentTranscript.aspx"
+			],
+			"css": [
+				"./utils/css/gpa.css"
+			],
+			"js": [
+				"./utils/storage.js",
+				"./content/fap_gpa.js"
+			],
+			"run_at": "document_end"
+		},
+		{
+			"js": [
+				"./content/stu_remove_banner.js",
+				"./content/stu_remove_blur.js",
+				"./content/stu_doc_viewer.js"
+			],
+			"css": [
+				"utils/css/studocu.css"
+			],
+			"matches": [
+				"*://www.studocu.com/*",
+				"*://www.studeersnel.nl/*"
+			]
+		},
+		{
+			"matches": [
+				"*://fap.fpt.edu.vn/Grade/StudentGrade.aspx?*"
+			],
+			"js": [
+				"./utils/storage.js",
+				"./utils/jquery.js",
+				"./content/fap_calculate_fe.js"
+			]
+		},
+		{
+			"matches": [
+				"*://www.coursera.org/*"
+			],
+			"exclude_matches": [
+				"*://www.coursera.org/*submit",
+				"*://www.coursera.org/*review*"
+			],
+			"js": [
+				"./utils/storage.js",
+				"./content/coursera_login.js"
+			]
+		},
+		{
+			"matches": [
+				"*://www.coursera.org/*submit"
+			],
+			"js": [
+				"./utils/storage.js",
+				"./content/coursera_getlink.js"
+			]
+		},
+		{
+			"matches": [
+				"*://www.coursera.org/*review*"
+			],
+			"js": [
+				"./utils/storage.js",
+				"./content/coursera_grade.js"
+			]
+			, "run_at":"document_end"
+		},
+		{
+			"matches": [
+				"*://fap.fpt.edu.vn/FrontOffice/SubjectFees.aspx"
+			],
+			"js": [
+				"./content/fap_getcourses.js"
+			]
+		},
+		{
+			"matches": [
+				"*://fap.fpt.edu.vn/FrontOffice/StudentCurriculum.aspx"
+			],
+			"js": [
+				"./content/fap_getbit.js"
+			]
+		},
+		{
+			"matches": [
+				"*://insideuni.fpt.edu.vn/*"
+			],
+			"js": [
+				"./utils/storage.js",
+				"./content/fap_mss.js"
+			],
+			"run_at": "document_end"
+		},
+		{
+			"matches":[
+				"*://fap.fpt.edu.vn/Thongbao.aspx"
+			],
+			"js":[
+				"./content/fap_redirect.js"
+			]
+			, "run_at": "document_start"
+		},
+		{
+			"matches": [
+				"*://soundcloud.com/*"
+			],
+			"css":[
+				"./utils/css/soundcloud-theme.css"
+			],
+			"run_at": "document_end"
+		},
+		{
+			"matches":["*://ocd.fpt.edu.vn/*"],
+			"js":[
+				"./utils/storage.js",
+				"./content/ocd_login.js"
+			],
+			"run_at":"document_end"
+		},
+		{
+			"matches":["*://www.google.com/*"],
+			"js":[
+				"./content/google_translate.js"
+			]
+		},
+		{
+			"matches":["*://ojt.fpt.edu.vn/Guest/CampusSelect*"],
+			"js":[
+				"./utils/storage.js",
+				"./content/ojt_autocampus.js"
+			],
+			"run_at":"document_end"
+		},
+		{
+			"matches":["*://ojt.fpt.edu.vn/*"],
+			"exclude_matches":["*://ojt.fpt.edu.vn/Guest/CampusSelect*"],
+			"js":[
+				"./utils/storage.js",
+				"./content/ojt_login.js"
+			],
+			"run_at":"document_end"
+		}
+	],
+	"icons": {
+		"16": "./assets/LogoChill.png",
+		"32": "./assets/LogoChill.png",
+		"48": "./assets/LogoChill.png",
+		"128": "./assets/LogoChill.png"
+	}
+}
