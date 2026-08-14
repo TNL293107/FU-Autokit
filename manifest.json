@@ -235,15 +235,6 @@
 		},
 		{
 			"matches": [
-				"*://tinder.com/*"
-			],
-			"js": [
-				"./content/web_t.js"
-			],
-			"world": "MAIN"
-		},
-		{
-			"matches": [
 				"*://fu-edunext.fpt.edu.vn/login"
 			],
 			"js": [
