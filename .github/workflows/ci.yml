@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# A new push to the same branch cancels the previous run: only the latest commit's
+# result is interesting.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Tests (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+
+    strategy:
+      # Both versions, because a failure on one and not the other is the useful signal.
+      fail-fast: false
+      matrix:
+        # 24 is the oldest maintained line, and it clears the one hard requirement this
+        # suite has: `node --test` only learned to expand glob patterns in 21, and
+        # package.json passes the pattern quoted so Node — not the shell — expands it.
+        # 26 is what the extension is developed against day to day.
+        node: ["24.x", "26.x"]
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Node ${{ matrix.node }}
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      # `npm ci` rather than `npm install`: it installs exactly what package-lock.json
+      # pins and fails if the two have drifted, which is the point of running this here.
+      - name: Install dependencies
+        run: npm ci
+
+      # Invoked through the npm script on purpose. The glob lives quoted inside
+      # package.json, so reconstructing the command here would let bash expand
+      # `test/**` first — and without globstar that becomes `test/*/`, which matches
+      # none of the suites and would pass by running nothing.
+      - name: Tests
+        run: npm test
+
+  # The manifest is what Chrome refuses to load if it is malformed, and a bad one is
+  # not something the unit tests can catch once they have already parsed it. Loading it
+  # with a strict parser here is cheap and fails before anyone tries to install a build.
+  manifest:
+    name: Manifest parses
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "26.x"
+
+      - name: Parse manifest.json and every locale file
+        run: |
+          node --input-type=module -e '
+            import { readFileSync } from "node:fs";
+            import { globSync } from "node:fs";
+            const files = ["manifest.json", ...globSync("_locales/*/messages.json")];
+            for (const file of files) {
+              try {
+                JSON.parse(readFileSync(file, "utf8"));
+                console.log(`ok   ${file}`);
+              } catch (error) {
+                console.error(`FAIL ${file}: ${error.message}`);
+                process.exitCode = 1;
+              }
+            }
+          '
