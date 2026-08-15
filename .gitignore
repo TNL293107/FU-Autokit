@@ -22,3 +22,6 @@ npm-debug.log*
 
 # Local tooling
 .claude/
+
+# Node dev tooling (test suite only - extension itself ships without it)
+node_modules/

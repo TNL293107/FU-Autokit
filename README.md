@@ -13,6 +13,7 @@
 - [Các chức năng chính](#các-chức-năng-chính)
 - [Cấu trúc dự án](#cấu-trúc-dự-án)
 - [Hướng dẫn Cài đặt và Sử dụng](#hướng-dẫn-cài-đặt-và-sử-dụng)
+- [Chạy test](#chạy-test)
 - [Tác giả](#tác-giả)
 - [Nguồn tham khảo và ghi công](#nguồn-tham-khảo-và-ghi-công)
 - [Đóng góp](#đóng-góp)
@@ -73,9 +74,11 @@ FU-Autokit/
 ├── service/          # Service worker và các script nền
 ├── utils/            # Thư viện dùng chung (jQuery, Bootstrap, CSS, storage helper)
 ├── windows/          # Cửa sổ phụ
+├── test/             # Test tự động (Node test runner) — không đóng gói vào extension
 ├── .gitignore
 ├── LICENSE
 ├── manifest.json     # Manifest V3 khai báo permissions, content_scripts, background
+├── package.json      # Chỉ phục vụ test; extension vẫn chạy không cần Node
 └── README.md
 ```
 
@@ -164,6 +167,28 @@ Dự án này tổng hợp và kế thừa ý tưởng lẫn mã nguồn từ nh
 | Không rõ tác giả | [Công cụ tính điểm FE](https://drive.google.com/file/d/1OdRFtmpg8B2c06XMEpXo4CDmSF07f01V/view?usp=sharing) |
 
 Nếu bạn là tác giả của một phần mã nguồn trong đây và muốn được ghi công khác đi, hoặc muốn gỡ bỏ, hãy mở một issue.
+
+## Chạy test
+
+Extension không cần Node để chạy — `package.json` chỉ phục vụ bộ test.
+
+```bash
+npm install
+npm test
+```
+
+Bộ test dùng **Node test runner** có sẵn (`node --test`), phụ thuộc dev duy nhất là `jsdom`.
+
+| File | Kiểm tra |
+|------|----------|
+| `test/manifest.test.mjs` | Mọi file mà `manifest.json` tham chiếu đều tồn tại; match pattern đúng cú pháp; script dùng `$()` hoặc `getFromStorage` phải được nạp sau `jquery.js` / `storage.js` |
+| `test/locales.test.mjs` | `_locales/vi` và `_locales/en` cùng tập key, không có message rỗng, placeholder đều được khai báo |
+| `test/service-worker.test.mjs` | Giá trị mặc định lúc cài đặt: `LANG` trỏ tới file có thật, đủ công tắc tính năng, `subjects`/`subjectsName` cùng độ dài, bản update không ghi đè cấu hình |
+| `test/storage.test.mjs` | `setToStorage` / `getFromStorage` với `chrome.storage.sync` giả lập |
+| `test/fap-calculate-fe.test.mjs` | Công thức tính điểm FE cần để qua môn, chạy trên trang FAP mô phỏng bằng jsdom + jQuery của extension |
+
+Content script vốn là classic script chạy trong trang web, không phải ES module. Test nạp chúng
+vào sandbox (`node:vm`) hoặc jsdom kèm API `chrome` giả — xem `test/helpers/extension-context.mjs`.
 
 ## Đóng góp
 
