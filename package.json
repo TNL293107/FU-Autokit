@@ -1,0 +1,13 @@
+{
+  "name": "fu-autokit",
+  "version": "3.4.0",
+  "private": true,
+  "description": "Dev tooling and test suite for the FU Autokit Chrome extension",
+  "scripts": {
+    "test": "node --test \"test/**/*.test.mjs\"",
+    "test:coverage": "node --test --experimental-test-coverage \"test/**/*.test.mjs\""
+  },
+  "devDependencies": {
+    "jsdom": "^24.1.3"
+  }
+}
